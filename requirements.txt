@@ -1,13 +1,6 @@
-<<<<<<< HEAD
-=======
-mysqlclient
->>>>>>> 78448c222cc461710c0a86406d61434dec2e5600
 Django==4.2.7
 Pillow==10.1.0
 django-crispy-forms==2.1
 crispy-bootstrap4==2024.1
-<<<<<<< HEAD
 dj-database-url==2.0.0
 psycopg2-binary ==2.9.6
-=======
->>>>>>> 78448c222cc461710c0a86406d61434dec2e5600
