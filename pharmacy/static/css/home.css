@@ -1,0 +1,138 @@
+/* Home Page Specific Styles */
+
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--bs-light);
+    position: relative;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(13,110,253,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 1;
+}
+
+.search-section {
+    position: relative;
+    z-index: 100;
+}
+
+#searchResults {
+    max-width: 66.666667%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.features-section .feature-box {
+    border-left: 4px solid var(--bs-primary);
+    transition: all 0.3s ease;
+}
+
+.features-section .feature-box:hover {
+    border-left-width: 8px;
+    background-color: white !important;
+}
+
+.products-section {
+    background: linear-gradient(to bottom, #f8f9fa 0%, white 100%);
+}
+
+.medicine-card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.medicine-card .card-img-top {
+    border-bottom: 3px solid var(--bs-primary);
+}
+
+.categories-section .category-box {
+    border-radius: 12px;
+    border: 2px solid transparent;
+}
+
+.categories-section .category-box:hover {
+    border-color: var(--bs-primary);
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.hero-section .col-md-6:first-child {
+    animation: slideInFromLeft 0.8s ease-out;
+}
+
+.hero-section .col-md-6:last-child {
+    animation: slideInFromRight 0.8s ease-out;
+}
+
+/* Featured Products Animation */
+.medicine-card {
+    animation: fadeIn 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.medicine-card:nth-child(1) { animation-delay: 0.1s; }
+.medicine-card:nth-child(2) { animation-delay: 0.2s; }
+.medicine-card:nth-child(3) { animation-delay: 0.3s; }
+.medicine-card:nth-child(4) { animation-delay: 0.4s; }
+
+/* Search Results Styling */
+#searchResults .list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    transition: background-color 0.2s ease;
+}
+
+#searchResults .list-group-item:hover {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+#searchResults .list-group-item:last-child {
+    border-bottom: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .hero-section {
+        text-align: center;
+    }
+    
+    .hero-section .col-md-6:last-child i {
+        font-size: 8rem !important;
+    }
+    
+    #searchResults {
+        max-width: 100%;
+    }
+}
