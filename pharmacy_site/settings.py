@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-<<<<<<< HEAD
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,16 +9,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
-=======
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-SECRET_KEY = 'django-insecure-your-secret-key-change-in-production'
-
-DEBUG = True
-
-ALLOWED_HOSTS = []
->>>>>>> 78448c222cc461710c0a86406d61434dec2e5600
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -65,27 +54,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pharmacy_site.wsgi.application'
 
 # MariaDB Database Configuration
-<<<<<<< HEAD
 
 
 DATABASES = {
     'default': dj_database_url.config(
         default=os.environ.get('DATABASE_URL')
     )
-=======
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pharmacy_db',
-        'USER': 'pharmacy_user',
-        'PASSWORD': 'pharmacy123',  # Change this
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-        }
-    }
->>>>>>> 78448c222cc461710c0a86406d61434dec2e5600
 }
 
 AUTH_PASSWORD_VALIDATORS = [
