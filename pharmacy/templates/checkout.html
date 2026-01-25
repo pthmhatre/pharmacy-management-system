@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Checkout - MediCare Pharmacy{% endblock %}
+
+{% block content %}
+<section class="checkout-section py-5">
+    <div class="container">
+        <h1 class="mb-4">
+            <i class="fas fa-credit-card text-primary"></i> Checkout
+        </h1>
+        
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">Shipping Information</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" id="checkoutForm">
+                            {% csrf_token %}
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.shipping_address.id_for_label }}" class="form-label">
+                                    Shipping Address *
+                                </label>
+                                {{ form.shipping_address }}
+                                {% if form.shipping_address.errors %}
+                                    <div class="text-danger small">{{ form.shipping_address.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="{{ form.contact_number.id_for_label }}" class="form-label">
+                                    Contact Number *
+                                </label>
+                                {{ form.contact_number }}
+                                {% if form.contact_number.errors %}
+                                    <div class="text-danger small">{{ form.contact_number.errors }}</div>
+                                {% endif %}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="fas fa-check-circle"></i> Place Order
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card shadow-sm mb-3">
+                    <div class="card-header bg-light">
+                        <h5 class="mb-0">Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        {% for item in cart_items %}
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>{{ item.medicine.name }} x {{ item.quantity }}</span>
+                            <span>${{ item.subtotal }}</span>
+                        </div>
+                        {% endfor %}
+                        
+                        <hr>
+                        
+                        <div class="d-flex justify-content-between mb-3">
+                            <strong>Total:</strong>
+                            <strong class="h4 text-primary">${{ total }}</strong>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6><i class="fas fa-info-circle text-info"></i> Order Information</h6>
+                        <ul class="small text-muted mb-0">
+                            <li>Orders are processed within 24 hours</li>
+                            <li>Free delivery on orders over $50</li>
+                            <li>Cash on delivery available</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

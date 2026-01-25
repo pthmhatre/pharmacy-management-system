@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Shopping Cart - MediCare Pharmacy{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="cart-section py-5">
+    <div class="container">
+        <h1 class="mb-4">
+            <i class="fas fa-shopping-cart text-primary"></i> Shopping Cart
+        </h1>
+        
+        {% if cart_items %}
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for item in cart_items %}
+                    <div class="card mb-3 shadow-sm cart-item">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    {% if item.medicine.image %}
+                                        <img src="{{ item.medicine.image.url }}" alt="{{ item.medicine.name }}" 
+                                             class="img-fluid rounded">
+                                    {% else %}
+                                        <div class="bg-secondary rounded d-flex align-items-center justify-content-center" 
+                                             style="height: 80px;">
+                                            <i class="fas fa-pills fa-2x text-white"></i>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-4">
+                                    <h5 class="mb-1">{{ item.medicine.name }}</h5>
+                                    <p class="text-muted small mb-0">{{ item.medicine.manufacturer }}</p>
+                                    <p class="text-primary fw-bold mb-0">${{ item.medicine.price }} each</p>
+                                </div>
+                                
+                                <div class="col-md-3">
+                                    <form method="POST" action="{% url 'update_cart' item.id %}" class="d-flex align-items-center">
+                                        {% csrf_token %}
+                                        <label class="me-2 small">Qty:</label>
+                                        <input type="number" name="quantity" value="{{ item.quantity }}" 
+                                               min="1" max="{{ item.medicine.quantity_available }}" 
+                                               class="form-control form-control-sm me-2" 
+                                               style="width: 70px;">
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-sync-alt"></i>
+                                        </button>
+                                    </form>
+                                    
+                                    {% if not item.is_quantity_available %}
+                                        <small class="text-danger mt-1 d-block">
+                                            <i class="fas fa-exclamation-triangle"></i> 
+                                            Only {{ item.medicine.quantity_available }} available
+                                        </small>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="col-md-2">
+                                    <p class="h5 text-primary mb-0">${{ item.subtotal }}</p>
+                                </div>
+                                
+                                <div class="col-md-1">
+                                    <form method="POST" action="{% url 'remove_from_cart' item.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" 
+                                                onclick="return confirm('Remove this item from cart?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="col-lg-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">Order Summary</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between mb-2">
+                                <span>Items:</span>
+                                <span>{{ cart_items.count }}</span>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between mb-3">
+                                <strong>Total:</strong>
+                                <strong class="h4 text-primary">${{ total }}</strong>
+                            </div>
+                            
+                            {% if unavailable_items %}
+                                <div class="alert alert-warning">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Some items have insufficient stock. Please update quantities.
+                                </div>
+                                <button class="btn btn-secondary w-100" disabled>
+                                    <i class="fas fa-lock"></i> Proceed to Checkout
+                                </button>
+                            {% else %}
+                                <a href="{% url 'checkout' %}" class="btn btn-primary w-100 btn-lg">
+                                    <i class="fas fa-check-circle"></i> Proceed to Checkout
+                                </a>
+                            {% endif %}
+                            
+                            <a href="{% url 'products' %}" class="btn btn-outline-secondary w-100 mt-2">
+                                <i class="fas fa-arrow-left"></i> Continue Shopping
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+                            <h6><i class="fas fa-shield-alt text-success"></i> Secure Checkout</h6>
+                            <p class="small text-muted mb-0">Your personal information is protected with SSL encryption.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-shopping-cart fa-5x text-muted mb-4"></i>
+                <h3 class="text-muted">Your cart is empty</h3>
+                <p class="text-muted">Add some medicines to your cart to get started.</p>
+                <a href="{% url 'products' %}" class="btn btn-primary btn-lg mt-3">
+                    <i class="fas fa-pills"></i> Browse Products
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
