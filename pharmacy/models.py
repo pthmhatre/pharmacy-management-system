@@ -2,11 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 from django.utils import timezone
-<<<<<<< HEAD
-=======
+
 from cloudinary.models import CloudinaryField
 
->>>>>>> Storage
+
 
 class Medicine(models.Model):
     """Model to store medicine inventory"""
@@ -16,12 +15,9 @@ class Medicine(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     quantity_available = models.IntegerField(validators=[MinValueValidator(0)])
     quantity_sold = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-<<<<<<< HEAD
-    image = models.ImageField(upload_to='medicines/', blank=True, null=True)
-=======
     # image = models.ImageField(upload_to='medicines/', blank=True, null=True)
     image = CloudinaryField('image')
->>>>>>> Storage
+
     prescription_required = models.BooleanField(default=False)
     category = models.CharField(max_length=100, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
