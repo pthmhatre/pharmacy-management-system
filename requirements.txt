@@ -10,3 +10,8 @@ crispy-bootstrap5
 
 Pillow>=9.5,<11.0
 python-dotenv
+<<<<<<< HEAD
+=======
+cloudinary
+django-cloudinary-storage
+>>>>>>> Storage

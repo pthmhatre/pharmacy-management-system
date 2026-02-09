@@ -13,6 +13,11 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+<<<<<<< HEAD
+=======
+    'cloudinary',
+    'cloudinary_storage',
+>>>>>>> Storage
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -62,6 +67,17 @@ DATABASES = {
     )
 }
 
+<<<<<<< HEAD
+=======
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+>>>>>>> Storage
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -89,7 +105,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
+<<<<<<< HEAD
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+=======
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+>>>>>>> Storage
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
