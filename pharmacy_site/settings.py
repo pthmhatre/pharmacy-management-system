@@ -13,11 +13,10 @@ ALLOWED_HOSTS = ["*"]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
-<<<<<<< HEAD
-=======
+
     'cloudinary',
     'cloudinary_storage',
->>>>>>> Storage
+
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
